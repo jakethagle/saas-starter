@@ -22,6 +22,7 @@ export default tseslint.config(
       '@typescript-eslint/consistent-type-definitions': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
+      'prefer-const': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
@@ -41,6 +42,7 @@ export default tseslint.config(
       '@typescript-eslint/prefer-nullish-coalescing': 'off',
       '@typescript-eslint/require-await': 'off',
       '@typescript-eslint/restrict-plus-operands': 'off',
+      '@typescript-eslint/prefer-const': 'off',
     },
   },
   {

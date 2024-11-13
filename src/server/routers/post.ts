@@ -53,6 +53,7 @@ export const postRouter = router({
           createdAt: 'desc',
         },
       });
+      // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
       let nextCursor: typeof cursor | undefined = undefined;
       if (items.length > limit) {
         // Remove the last item and use it as next cursor

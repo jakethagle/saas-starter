@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import type { ReactNode } from 'react';
-
+import { SidebarLayout } from './ui/sidebar-layout';
+import LayoutSidebar from './Sidebar';
 type DefaultLayoutProps = { children: ReactNode };
 
 export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
@@ -11,7 +12,9 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="h-screen">{children}</main>
+      <SidebarLayout navbar={undefined} sidebar={LayoutSidebar()}>
+        {children}
+      </SidebarLayout>
     </>
   );
 };

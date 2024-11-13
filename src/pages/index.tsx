@@ -1,12 +1,92 @@
-import { trpc } from '../utils/trpc';
+import { trpc } from '~/utils/trpc';
 import type { NextPageWithLayout } from './_app';
-import type { inferProcedureInput } from '@trpc/server';
-import Link from 'next/link';
 import { Fragment } from 'react';
-import type { AppRouter } from '~/server/routers/_app';
+import { Form, SubmitButton, useZodForm } from '~/features/form';
+import { z } from 'zod';
+import { Input } from '~/components/ui/input';
+import { Textarea } from '~/components/ui/textarea';
+import { Text, TextLink } from '~/components/ui/text';
+import {
+  ErrorMessage,
+  Field,
+  FieldGroup,
+  Fieldset,
+  Label,
+  Legend,
+} from '~/components/ui/fieldset';
+import { Button } from '~/components/ui/button';
+import { Heading } from '~/components/ui/heading';
+export const validationSchema = z.object({
+  title: z.string().min(2),
+  text: z.string().min(5),
+});
 
+function AddPostForm() {
+  const utils = trpc.useUtils().post;
+
+  const mutation = trpc.post.add.useMutation({
+    onSuccess: async () => {
+      await utils.list.invalidate();
+    },
+  });
+
+  const form = useZodForm({
+    schema: validationSchema,
+    defaultValues: {
+      title: '',
+      text: '',
+    },
+  });
+
+  return (
+    <>
+      <Form
+        form={form}
+        handleSubmit={async (values) => {
+          await mutation.mutateAsync(values);
+          form.reset();
+        }}
+      >
+        <Fieldset className="pt-4">
+          <Legend>Post Details</Legend>
+          <Text>Provide the subject and details of your post.</Text>
+          <FieldGroup className="">
+            <Field>
+              <Label>Title</Label>
+              <Input {...form.register('title')} />
+              <ErrorMessage>
+                {form.formState.errors.title?.message}
+              </ErrorMessage>
+            </Field>
+            <Field>
+              <Label>Text</Label>
+              <Textarea {...form.register('text')} />
+              <ErrorMessage>{form.formState.errors.text?.message}</ErrorMessage>
+            </Field>
+          </FieldGroup>
+        </Fieldset>
+        {/* {form.formState.errors.title?.message && (
+          <p className="text-red-700">{form.formState.errors.title?.message}</p>
+        )}
+        <div>
+          {form.formState.errors.text?.message && (
+            <p className="text-red-700">
+              {form.formState.errors.text?.message}
+            </p>
+          )}
+        </div> */}
+      </Form>
+      <SubmitButton
+        form={form} // If you place the submit button outside of the form, you need to specify the form to submit
+        // className="border bg-primary-500 text-white p-2 font-bold"
+      >
+        Add post
+      </SubmitButton>
+    </>
+  );
+}
 const IndexPage: NextPageWithLayout = () => {
-  const utils = trpc.useUtils();
+  // const utils = trpc.useUtils();
   const postsQuery = trpc.post.list.useInfiniteQuery(
     {
       limit: 5,
@@ -18,13 +98,6 @@ const IndexPage: NextPageWithLayout = () => {
     },
   );
 
-  const addPost = trpc.post.add.useMutation({
-    async onSuccess() {
-      // refetches posts after a post is added
-      await utils.post.list.invalidate();
-    },
-  });
-
   // prefetch all posts for instant navigation
   // useEffect(() => {
   //   const allPosts = postsQuery.data?.pages.flatMap((page) => page.items) ?? [];
@@ -34,76 +107,53 @@ const IndexPage: NextPageWithLayout = () => {
   // }, [postsQuery.data, utils]);
 
   return (
-    <div className="flex flex-col bg-gray-800 py-8">
-      <h1 className="text-4xl font-bold">
-        Welcome to your tRPC with Prisma starter!
-      </h1>
-      <p className="text-gray-400">
-        If you get stuck, check{' '}
-        <Link className="underline" href="https://trpc.io">
-          the docs
-        </Link>
-        , write a message in our{' '}
-        <Link className="underline" href="https://trpc.io/discord">
-          Discord-channel
-        </Link>
-        , or write a message in{' '}
-        <Link
-          className="underline"
-          href="https://github.com/trpc/trpc/discussions"
-        >
-          GitHub Discussions
-        </Link>
-        .
-      </p>
-
+    <div>
+      <Heading>Welcome to your SaaS Starter!</Heading>
       <div className="flex flex-col py-8 items-start gap-y-2">
-        <div className="flex flex-col"></div>
-        <h2 className="text-3xl font-semibold">
-          Latest Posts
-          {postsQuery.status === 'pending' && '(loading)'}
-        </h2>
-
-        <button
-          className="bg-gray-900 p-2 rounded-md font-semibold disabled:bg-gray-700 disabled:text-gray-400"
-          onClick={() => postsQuery.fetchNextPage()}
-          disabled={!postsQuery.hasNextPage || postsQuery.isFetchingNextPage}
-        >
-          {postsQuery.isFetchingNextPage
-            ? 'Loading more...'
-            : postsQuery.hasNextPage
-              ? 'Load More'
-              : 'Nothing more to load'}
-        </button>
-
-        {postsQuery.data?.pages.map((page, index) => (
-          <Fragment key={page.items[0]?.id || index}>
-            {page.items.map((item) => (
-              <article key={item.id}>
-                <h3 className="text-2xl font-semibold">{item.title}</h3>
-                <Link className="text-gray-400" href={`/post/${item.id}`}>
-                  View more
-                </Link>
-              </article>
-            ))}
-          </Fragment>
-        ))}
+        <div className="flex flex-row w-full justify-between">
+          <Heading level={2}>
+            Latest Posts {postsQuery.status === 'pending' && '(loading)'}
+          </Heading>
+          <Button
+            onClick={() => postsQuery.fetchNextPage()}
+            disabled={!postsQuery.hasNextPage || postsQuery.isFetchingNextPage}
+          >
+            {postsQuery.isFetchingNextPage
+              ? 'Loading more...'
+              : postsQuery.hasNextPage
+                ? 'Load More'
+                : 'Nothing more to load'}
+          </Button>
+        </div>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 w-full">
+          {postsQuery.data?.pages.map((page, index) => (
+            <Fragment key={page.items[0]?.id || index}>
+              {page.items.map((item) => (
+                <article
+                  className="col-span-1 rounded-lg shadow bg-white/75 backdrop-blur-xl dark:bg-zinc-800/75 p-4 w-full"
+                  key={item.id}
+                >
+                  <Heading level={3}>{item.title}</Heading>
+                  <TextLink className="" href={`/post/${item.id}`}>
+                    View more
+                  </TextLink>
+                </article>
+              ))}
+            </Fragment>
+          ))}
+        </div>
       </div>
 
       <hr />
 
-      <div className="flex flex-col py-8 items-center">
-        <h2 className="text-3xl font-semibold pb-2">Add a Post</h2>
-
-        <form
+      <div className="flex flex-col py-8">
+        <Heading level={3}>Add a Post</Heading>
+        <div className="">
+          <AddPostForm />
+        </div>
+        {/* <form
           className="py-2 w-4/6"
           onSubmit={async (e) => {
-            /**
-             * In a real app you probably don't want to use this manually
-             * Checkout React Hook Form - it works great with tRPC
-             * @see https://react-hook-form.com/
-             * @see https://kitchen-sink.trpc.io/react-hook-form
-             */
             e.preventDefault();
             const $form = e.currentTarget;
             const values = Object.fromEntries(new FormData($form));
@@ -151,7 +201,7 @@ const IndexPage: NextPageWithLayout = () => {
               )}
             </div>
           </div>
-        </form>
+        </form> */}
       </div>
     </div>
   );
