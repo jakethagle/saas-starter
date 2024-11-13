@@ -4,6 +4,7 @@
   "scripts": {
     "generate": "prisma generate",
     "prisma-studio": "prisma studio",
+    "db:up": "docker compose up -d",
     "db-seed": "prisma db seed",
     "db-reset": "prisma migrate dev reset",
     "dx:next": "run-s migrate-dev db-seed && next dev",
