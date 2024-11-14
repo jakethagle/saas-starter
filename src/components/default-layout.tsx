@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import type { ReactNode } from 'react';
 import { SidebarLayout } from './ui/sidebar-layout';
-import LayoutSidebar from './Sidebar';
+import LayoutSidebar from './sidebar';
 type DefaultLayoutProps = { children: ReactNode };
 
 export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
@@ -11,7 +11,6 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
         <title>Prisma Starter</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <SidebarLayout navbar={undefined} sidebar={LayoutSidebar()}>
         {children}
       </SidebarLayout>

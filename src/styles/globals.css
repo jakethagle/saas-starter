@@ -3,8 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply lg:bg-zinc-100 dark:bg-zinc-900 dark:lg:bg-zinc-950;
+  }
   body {
     height: 100vh;
-    /* padding: 0 32px; */
   }
 }
