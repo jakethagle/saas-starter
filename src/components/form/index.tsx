@@ -12,7 +12,7 @@ import {
 import { z } from 'zod';
 import { Button } from '~/components/ui/button';
 
-type UseZodForm<TInput extends FieldValues> = UseFormReturn<TInput> & {
+export type UseZodForm<TInput extends FieldValues> = UseFormReturn<TInput> & {
   /**
    * A unique ID for this form.
    */

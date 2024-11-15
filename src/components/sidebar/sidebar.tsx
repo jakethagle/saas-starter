@@ -29,15 +29,12 @@ import {
   UserIcon,
 } from '@heroicons/react/16/solid/index.js';
 import {
-  Cog6ToothIcon,
-  HomeIcon,
   InboxIcon,
   MagnifyingGlassIcon,
   QuestionMarkCircleIcon,
   SparklesIcon,
-  Square2StackIcon,
-  TicketIcon,
 } from '@heroicons/react/20/solid/index.js';
+import SidebarRoutes from './sidebar-routes';
 
 export default function LayoutSidebar() {
   return (
@@ -79,22 +76,7 @@ export default function LayoutSidebar() {
       </SidebarHeader>
       <SidebarBody>
         <SidebarSection>
-          <SidebarItem current={true} href="/">
-            <HomeIcon />
-            <SidebarLabel>Home</SidebarLabel>
-          </SidebarItem>
-          <SidebarItem href="/">
-            <Square2StackIcon />
-            <SidebarLabel>Posts</SidebarLabel>
-          </SidebarItem>
-          <SidebarItem href="/#">
-            <TicketIcon />
-            <SidebarLabel>Todo</SidebarLabel>
-          </SidebarItem>
-          <SidebarItem href="/settings">
-            <Cog6ToothIcon />
-            <SidebarLabel>Settings</SidebarLabel>
-          </SidebarItem>
+          <SidebarRoutes />
         </SidebarSection>
         <SidebarSpacer />
         <SidebarSection>

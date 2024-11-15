@@ -26,6 +26,7 @@ export const postRouter = router({
     .input(
       z.object({
         limit: z.number().min(1).max(100).nullish(),
+        id: z.string().nullish(),
         cursor: z.string().nullish(),
       }),
     )
@@ -37,7 +38,7 @@ export const postRouter = router({
        */
 
       const limit = input.limit ?? 50;
-      const { cursor } = input;
+      const { cursor, id } = input;
 
       const items = await prisma.post.findMany({
         select: defaultPostSelect,
@@ -46,7 +47,7 @@ export const postRouter = router({
         where: {},
         cursor: cursor
           ? {
-              id: cursor,
+              id: id ? id : cursor,
             }
           : undefined,
         orderBy: {
