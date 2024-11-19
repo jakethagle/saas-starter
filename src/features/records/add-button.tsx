@@ -10,7 +10,7 @@ import AddRecordForm, { validationSchema } from './form';
 import { SubmitButton, useZodForm } from '~/components/form';
 import { trpc } from '~/utils/trpc';
 
-function RecordDialog() {
+function AddRecordButton() {
   let [isOpen, setIsOpen] = useState(false);
   const form = useZodForm({
     schema: validationSchema,
@@ -20,7 +20,6 @@ function RecordDialog() {
     },
   });
   const utils = trpc.useUtils().post;
-
   const mutation = trpc.post.add.useMutation({
     onSuccess: async () => {
       await utils.list.invalidate();
@@ -33,7 +32,7 @@ function RecordDialog() {
 
   return (
     <>
-      <Button plain type="button" onClick={() => setIsOpen(true)}>
+      <Button type="button" onClick={() => setIsOpen(true)}>
         Add Record
       </Button>
       <Dialog open={isOpen} onClose={setIsOpen}>
@@ -51,4 +50,4 @@ function RecordDialog() {
     </>
   );
 }
-export default RecordDialog;
+export default AddRecordButton;

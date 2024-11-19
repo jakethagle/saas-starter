@@ -4,26 +4,24 @@ import { Heading, Subheading } from '~/components/ui/heading';
 import { Divider } from '~/components/ui/divider';
 
 import RecordTable from '~/features/records/table';
-import RecordDialog from '~/features/records/dialog';
+import AddRecordButton from '~/features/records/add-button';
 
 const IndexPage: NextPageWithLayout = () => {
-  const postQuery = trpc.post.list.useQuery(
-    {},
-    {
-      // getNextPageParam: (lastPage) => lastPage.nextCursor,
-    },
-  );
+  const postQuery = trpc.post.list.useQuery({ limit: 10 });
 
   return (
     <div className="w-full">
-      <Heading>Records</Heading>
+      <div className="flex flex-row justify-between">
+        <Heading>Records</Heading>
+        <AddRecordButton />
+      </div>
+
       <Divider className="my-10 mt-6" />
-      <section className="py-8 items-start gap-y-2 w-full">
+      <section className="items-start gap-y-2 w-full">
         <div className="flex flex-row justify-between">
           <Subheading>
             All Records {postQuery.status === 'pending' && '(loading)'}
           </Subheading>
-          <RecordDialog />
         </div>
 
         <RecordTable records={postQuery.data} />

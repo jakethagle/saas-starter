@@ -1,14 +1,16 @@
 import { trpc } from '~/utils/trpc';
 import type { NextPageWithLayout } from './_app';
 import { Fragment } from 'react';
-
 import { Button } from '~/components/ui/button';
 import { Heading, Subheading } from '~/components/ui/heading';
 import { Divider } from '~/components/ui/divider';
 import { RouterOutput } from '~/utils/trpc';
 import { Avatar } from '~/components/ui/avatar';
 import { Link } from '~/components/ui/link';
+import Template from '~/components/empty-state/templates';
+
 type Post = RouterOutput['post']['list']['items'][0];
+
 function PostCard({ post }: { post: Post }) {
   return (
     <article
@@ -55,6 +57,7 @@ const IndexPage: NextPageWithLayout = () => {
             View More
           </Button>
         </div>
+        <Divider soft className="mb-6" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 w-full">
           {postsQuery.data?.pages.map((page, index) => (
             <Fragment key={page.items[0]?.id || index}>
@@ -64,6 +67,9 @@ const IndexPage: NextPageWithLayout = () => {
             </Fragment>
           ))}
         </div>
+      </section>
+      <section className="my-10">
+        <Template />
       </section>
     </div>
   );

@@ -103,4 +103,22 @@ export const postRouter = router({
       });
       return post;
     }),
+  edit: publicProcedure
+    .input(
+      z.object({
+        id: z.string().uuid(),
+        data: z.object({
+          title: z.string().min(1).max(32).optional(),
+          text: z.string().min(1).optional(),
+        }),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const { id, data } = input;
+      const todo = await prisma.post.update({
+        where: { id },
+        data,
+      });
+      return todo;
+    }),
 });
