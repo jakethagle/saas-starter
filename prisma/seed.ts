@@ -21,12 +21,11 @@ async function main() {
   });
   await prisma.user.create({
     data: {
-      username: defaultUser.email,
       email: defaultUser.email,
-      firstName: defaultUser.firstName,
-      lastName: defaultUser.lastName,
-      tenantId: tenantId,
-      tenants: { create: { role: 'Admin', tenantId: tenantId } },
+      // firstName: defaultUser.firstName,
+      // lastName: defaultUser.lastName,
+      name: `${defaultUser.firstName} ${defaultUser.lastName}`,
+      userTenants: { create: { role: 'Admin', tenantId: tenantId } },
     },
   });
 

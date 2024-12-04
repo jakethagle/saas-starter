@@ -15,9 +15,12 @@ import { prisma } from '~/server/prisma';
  */
 const defaultuserSelect = {
   id: true,
-  firstName: true,
-  lastName: true,
-  tenants: { include: { tenant: true } },
+  accounts: true,
+  email: true,
+  name: true,
+  sessions: true,
+  emailVerified: true,
+  userTenants: { include: { tenant: true } },
 } satisfies Prisma.UserSelect;
 
 export const userRouter = router({
@@ -79,7 +82,7 @@ export const userRouter = router({
         where: { id },
         select: defaultuserSelect,
       });
-      console.log(JSON.stringify(user, undefined, 2));
+
       if (!user) {
         throw new TRPCError({
           code: 'NOT_FOUND',

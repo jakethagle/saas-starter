@@ -11,7 +11,7 @@ test('get user information', async () => {
   const caller = createCaller(ctx);
 
   const input: inferProcedureInput<AppRouter['users']['byId']> = {
-    id: '551728f1-deb4-47d0-ac11-46a7a0bd4bd3',
+    id: 'cm4a3olcz0000h37t2sirpgkn',
   };
 
   const byId = await caller.users.byId(input);
