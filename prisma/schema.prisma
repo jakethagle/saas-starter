@@ -10,6 +10,33 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Tenant {
+  id    String       @id @default(uuid())
+  name  String
+  users UserTenant[]
+}
+
+model UserTenant {
+  id       String @id @default(uuid())
+  tenantId String
+  userId   String
+  role     String
+  user     User   @relation(fields: [userId], references: [id])
+  tenant   Tenant @relation(fields: [tenantId], references: [id])
+
+  @@unique([userId, tenantId])
+}
+
+model User {
+  id        String       @id @default(uuid())
+  firstName String?
+  lastName  String?
+  username  String
+  email     String
+  tenantId  String
+  tenants   UserTenant[]
+}
+
 model Post {
   id    String @id @default(uuid())
   title String
