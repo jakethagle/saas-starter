@@ -19,15 +19,15 @@ async function main() {
       name: 'Acme Co',
     },
   });
-  await prisma.user.create({
-    data: {
-      email: defaultUser.email,
-      // firstName: defaultUser.firstName,
-      // lastName: defaultUser.lastName,
-      name: `${defaultUser.firstName} ${defaultUser.lastName}`,
-      userTenants: { create: { role: 'Admin', tenantId: tenantId } },
-    },
-  });
+  // await prisma.user.create({
+  //   data: {
+  //     email: defaultUser.email,
+  //     // firstName: defaultUser.firstName,
+  //     // lastName: defaultUser.lastName,
+  //     name: `${defaultUser.firstName} ${defaultUser.lastName}`,
+  //     tenants: { create: { role: 'Admin', tenantId: tenantId } },
+  //   },
+  // });
 
   const firstPostId = '5c03994c-fc16-47e0-bd02-d218a370a078';
   await prisma.post.upsert({
