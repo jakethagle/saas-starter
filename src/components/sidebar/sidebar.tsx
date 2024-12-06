@@ -35,8 +35,13 @@ import {
   SparklesIcon,
 } from '@heroicons/react/20/solid/index.js';
 import SidebarRoutes from './sidebar-routes';
+import { signOut } from 'next-auth/react';
 
 export default function LayoutSidebar() {
+  // const session = useSession();
+  const handleSignOut = async () => {
+    await signOut({ redirect: true, redirectTo: '/' });
+  };
   return (
     <Sidebar>
       <SidebarHeader>
@@ -125,7 +130,7 @@ export default function LayoutSidebar() {
               <DropdownLabel>Share feedback</DropdownLabel>
             </DropdownItem>
             <DropdownDivider />
-            <DropdownItem href="/logout">
+            <DropdownItem onClick={handleSignOut}>
               <ArrowRightStartOnRectangleIcon />
               <DropdownLabel>Sign out</DropdownLabel>
             </DropdownItem>

@@ -8,8 +8,6 @@ import { RouterOutput } from '~/utils/trpc';
 import { Avatar } from '~/components/ui/avatar';
 import { Link } from '~/components/ui/link';
 import Template from '~/components/empty-state/templates';
-import { signIn, useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
 
 type Post = RouterOutput['post']['list']['items'][0];
 
@@ -45,16 +43,11 @@ const IndexPage: NextPageWithLayout = () => {
       },
     },
   );
-  const session = useSession();
-  if (session.status === 'unauthenticated') {
-    redirect('/404');
-  }
+
   return (
     <div>
       <Heading>Welcome to your SaaS Starter!</Heading>
-      <Divider className="my-10 mt-6" />
-
-      <button onClick={() => signIn('github')}>Sign In</button>
+      <Divider className="mt-6" />
       <section className="flex flex-col py-8 items-start gap-y-2">
         <div className="flex flex-row w-full justify-between">
           <Subheading>
@@ -64,12 +57,11 @@ const IndexPage: NextPageWithLayout = () => {
             View More
           </Button>
         </div>
-        <Divider soft className="mb-6" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 w-full">
           {postsQuery.data?.pages.map((page, index) => (
-            <Fragment key={page.items[0]?.id || index}>
+            <Fragment>
               {page.items.map((item) => (
-                <PostCard post={item} />
+                <PostCard key={page.items[0]?.id || index} post={item} />
               ))}
             </Fragment>
           ))}

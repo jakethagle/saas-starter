@@ -8,7 +8,6 @@ import {
 } from '@heroicons/react/24/outline';
 import { Subheading } from '../ui/heading';
 import { Text, TextLink } from '../ui/text';
-import { Divider } from '../ui/divider';
 
 const items = [
   {
@@ -61,7 +60,6 @@ export default function Template() {
         You haven’t created a project yet. Get started by selecting a template
         or start from an empty project.
       </Subheading>
-      <Divider soft className="mt-4" />
       <ul
         role="list"
         className="mt-6 grid grid-cols-1 gap-6 py-6 sm:grid-cols-2"
