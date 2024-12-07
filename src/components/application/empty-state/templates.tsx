@@ -6,8 +6,8 @@ import {
   TableCellsIcon,
   ViewColumnsIcon,
 } from '@heroicons/react/24/outline';
-import { Subheading } from '../ui/heading';
-import { Text, TextLink } from '../ui/text';
+import { Subheading } from '~/components/ui/heading';
+import { Text, TextLink } from '~/components/ui/text';
 
 const items = [
   {
@@ -41,8 +41,8 @@ const items = [
     background: 'bg-indigo-500',
   },
   {
-    title: 'Create a Timeline',
-    description: 'Get a birds-eye-view of your procrastination.',
+    title: 'Setup Your Profile',
+    description: 'Add your profile picture and update your settings.',
     icon: ClockIcon,
     background: 'bg-purple-500',
   },
@@ -55,10 +55,10 @@ function classNames(...classes: string[]) {
 export default function Template() {
   return (
     <div>
-      <Subheading className="">Projects</Subheading>
+      <Subheading className="">Getting Started</Subheading>
       <Subheading muted>
-        You haven’t created a project yet. Get started by selecting a template
-        or start from an empty project.
+        Get started by inviting teamates, setting up your account, or start
+        creating new records.
       </Subheading>
       <ul
         role="list"

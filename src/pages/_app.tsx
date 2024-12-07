@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import type { AppType, AppProps } from 'next/app';
 import type { ComponentProps, ReactElement, ReactNode } from 'react';
 
-import { DefaultLayout } from '~/components/default-layout';
+import { DefaultLayout } from '~/components/application/default-layout';
 import { trpc } from '~/utils/trpc';
 import '~/styles/globals.css';
 import { SessionProvider } from 'next-auth/react';

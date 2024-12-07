@@ -7,7 +7,7 @@ import {
 } from '~/components/ui/dialog';
 import { useState } from 'react';
 import AddRecordForm, { validationSchema } from './form';
-import { SubmitButton, useZodForm } from '~/components/form';
+import { SubmitButton, useZodForm } from '~/components/application/form';
 import { trpc } from '~/utils/trpc';
 
 function AddRecordButton() {

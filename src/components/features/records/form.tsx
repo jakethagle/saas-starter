@@ -1,4 +1,4 @@
-import { Form, UseZodForm } from '~/components/form';
+import { Form, UseZodForm } from '~/components/application/form';
 import { Input } from '~/components/ui/input';
 import { Textarea } from '~/components/ui/textarea';
 import { Text } from '~/components/ui/text';

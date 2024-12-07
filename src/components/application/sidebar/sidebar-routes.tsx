@@ -1,5 +1,5 @@
 import { usePathname } from 'next/navigation';
-import { SidebarItem, SidebarLabel } from '../ui/sidebar';
+import { SidebarItem, SidebarLabel } from '../../ui/sidebar';
 import {
   HomeIcon,
   Square2StackIcon,

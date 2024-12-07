@@ -11,7 +11,7 @@ import { Button } from '~/components/ui/button';
 import { Heading, Subheading } from '~/components/ui/heading';
 import { Link } from '~/components/ui/link';
 import { Code, Text } from '~/components/ui/text';
-import { EditButton } from '~/features/records/edit-button';
+import { EditButton } from '~/components/features/records/edit-button';
 
 import type { NextPageWithLayout } from '~/pages/_app';
 import type { RouterOutput } from '~/utils/trpc';

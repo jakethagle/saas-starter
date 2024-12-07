@@ -11,7 +11,7 @@ import { Input } from '~/components/ui/input';
 import { useState } from 'react';
 import { RouterOutput, trpc } from '~/utils/trpc';
 import { Textarea } from '~/components/ui/textarea';
-import { useZodForm, Form, SubmitButton } from '~/components/form';
+import { useZodForm, Form, SubmitButton } from '~/components/application/form';
 import { validationSchema } from './form';
 
 type Post = RouterOutput['post']['list']['items'][number];

@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import type { ReactNode } from 'react';
-import { SidebarLayout } from './ui/sidebar-layout';
+import { SidebarLayout } from '../ui/sidebar-layout';
 import LayoutSidebar from './sidebar/sidebar';
 import { useSession } from 'next-auth/react';
-import { LoadingSpinner } from './ui/loading-spinner';
+import { LoadingSpinner } from '../ui/loading-spinner';
 
 type DefaultLayoutProps = { children: ReactNode };
 export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
