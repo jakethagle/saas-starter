@@ -23,7 +23,7 @@ const IndexPage: NextPageWithLayout = () => {
     <div>
       <Heading>Welcome to your SaaS Starter!</Heading>
       <Divider className="mt-6" />
-      <section className="flex flex-col py-8 items-start gap-y-2">
+      <section className="flex flex-col py-8 items-start">
         <div className="flex flex-row w-full justify-between">
           <Subheading>
             Pinned Records {postsQuery.status === 'pending' && '(loading)'}
@@ -42,7 +42,7 @@ const IndexPage: NextPageWithLayout = () => {
           ))}
         </div>
       </section>
-      <section className="my-10">
+      <section className="py-8">
         <Template />
       </section>
     </div>

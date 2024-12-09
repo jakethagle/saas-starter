@@ -1,4 +1,5 @@
 import GitHub from 'next-auth/providers/github';
+
 import { type DefaultSession } from 'next-auth';
 import { type NextAuthConfig } from 'next-auth';
 

@@ -8,7 +8,6 @@ import { LoadingSpinner } from '../ui/loading-spinner';
 type DefaultLayoutProps = { children: ReactNode };
 export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   const session = useSession();
-
   return (
     <>
       <Head>
@@ -16,7 +15,10 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {session.status === 'authenticated' ? (
-        <SidebarLayout navbar={undefined} sidebar={LayoutSidebar()}>
+        <SidebarLayout
+          navbar={undefined}
+          sidebar={LayoutSidebar({ session: session.data })}
+        >
           {children}
         </SidebarLayout>
       ) : (

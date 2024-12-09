@@ -6,8 +6,9 @@ import {
   TableCellsIcon,
   ViewColumnsIcon,
 } from '@heroicons/react/24/outline';
+import { Button } from '~/components/ui/button';
 import { Subheading } from '~/components/ui/heading';
-import { Text, TextLink } from '~/components/ui/text';
+import { Text } from '~/components/ui/text';
 
 const items = [
   {
@@ -60,10 +61,7 @@ export default function Template() {
         Get started by inviting teamates, setting up your account, or start
         creating new records.
       </Subheading>
-      <ul
-        role="list"
-        className="mt-6 grid grid-cols-1 gap-6 py-6 sm:grid-cols-2"
-      >
+      <ul role="list" className="grid grid-cols-1 gap-6 py-6 sm:grid-cols-2">
         {items.map((item, itemIdx) => (
           <li key={itemIdx} className="flow-root">
             <div className="relative -m-2 flex items-center space-x-4 rounded-xl p-2 focus-within:ring-2 focus-within:ring-indigo-500 hover:bg-gray-50 dark:hover:bg-white/10">
@@ -92,10 +90,10 @@ export default function Template() {
         ))}
       </ul>
       <div className="mt-4 flex">
-        <TextLink href="#" className="">
+        <Button plain href="#" className="">
           Or start from an empty project
           <span aria-hidden="true"> &rarr;</span>
-        </TextLink>
+        </Button>
       </div>
     </div>
   );

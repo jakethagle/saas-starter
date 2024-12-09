@@ -26,7 +26,7 @@ function SidebarRoute({
 function SidebarRoutes() {
   return (
     <>
-      <SidebarRoute href="/">
+      <SidebarRoute href="/dashboard">
         <HomeIcon />
         <SidebarLabel>Home</SidebarLabel>
       </SidebarRoute>

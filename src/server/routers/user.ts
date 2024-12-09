@@ -20,7 +20,7 @@ const defaultuserSelect = {
   name: true,
   sessions: true,
   emailVerified: true,
-  userTenants: { include: { tenant: true } },
+  tenants: { include: { tenant: true } },
 } satisfies Prisma.UserSelect;
 
 export const userRouter = router({

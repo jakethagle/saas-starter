@@ -36,9 +36,12 @@ import {
 } from '@heroicons/react/20/solid/index.js';
 import SidebarRoutes from './sidebar-routes';
 import { signOut } from 'next-auth/react';
-
-export default function LayoutSidebar() {
-  // const session = useSession();
+import { Session } from 'next-auth';
+interface SidebarProps {
+  // children: React.ReactNode;
+  session: Session | null;
+}
+export default function LayoutSidebar({ session }: SidebarProps) {
   const handleSignOut = async () => {
     await signOut({ redirect: true, redirectTo: '/' });
   };
@@ -99,13 +102,18 @@ export default function LayoutSidebar() {
         <Dropdown>
           <DropdownButton as={SidebarItem}>
             <span className="flex min-w-0 items-center gap-3">
-              <Avatar src="/catalyst.svg" className="size-10" square alt="" />
+              <Avatar
+                src={session?.user.image}
+                className="size-10"
+                square
+                alt=""
+              />
               <span className="min-w-0">
                 <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">
-                  FrostyDog
+                  {session?.user.name}
                 </span>
                 <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
-                  frostydog@acmelabs.io
+                  {session?.user.email}
                 </span>
               </span>
             </span>
